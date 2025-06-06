@@ -1,0 +1,29 @@
+stages:
+  - setup
+
+download_plugins:
+  stage: setup
+  image: alpine:latest
+  script:
+    - apk add --no-cache curl unzip
+    - mkdir -p wordpress/wp-content/plugins
+    - cd wordpress
+
+    # Download latest WordPress
+    - curl -o wordpress.zip https://wordpress.org/latest.zip
+    - unzip wordpress.zip
+    - mv wordpress/* .
+    - rm -rf wordpress wordpress.zip
+
+    # Download Contact Form 7
+    - curl -L -o wp-content/plugins/contact-form-7.zip https://downloads.wordpress.org/plugin/contact-form-7.latest-stable.zip
+    - unzip wp-content/plugins/contact-form-7.zip -d wp-content/plugins/
+    - rm wp-content/plugins/contact-form-7.zip
+
+    # Download GTM plugin
+    - curl -L -o wp-content/plugins/gtm.zip https://downloads.wordpress.org/plugin/duracelltomi-google-tag-manager.latest-stable.zip
+    - unzip wp-content/plugins/gtm.zip -d wp-content/plugins/
+    - rm wp-content/plugins/gtm.zip
+  artifacts:
+    paths:
+      - wordpress/
