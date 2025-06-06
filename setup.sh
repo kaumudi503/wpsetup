@@ -17,3 +17,9 @@ rm wp-content/plugins/contact-form-7.zip
 curl -L -o wp-content/plugins/gtm.zip https://downloads.wordpress.org/plugin/duracelltomi-google-tag-manager.latest-stable.zip
 unzip wp-content/plugins/gtm.zip -d wp-content/plugins/
 rm wp-content/plugins/gtm.zip
+
+# Go back to parent directory and move everything from 'wordpress' to root
+cd ..
+shopt -s dotglob  # Include hidden files (e.g., .htaccess if present)
+mv wordpress/* .
+rmdir wordpress
