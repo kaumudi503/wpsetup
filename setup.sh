@@ -25,5 +25,6 @@ mv wordpress/* .
 rmdir wordpress
 
 # Clean up CI file and this script
+rm -f README.md
 rm -f gitlab-ci.yml
 rm -- "$0"
